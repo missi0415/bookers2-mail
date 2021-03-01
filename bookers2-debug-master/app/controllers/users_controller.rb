@@ -23,18 +23,13 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  #フォr－機能
+  #フォロ－機能
   def following
-    
     @user  = User.find(params[:id])
-   
-
   end
 
   def followers
-  
     @user  = User.find(params[:id])
-
   end
   #-----------------
   
