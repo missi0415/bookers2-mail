@@ -10,7 +10,27 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   #いいね機能
   has_many :favorites, dependent: :destroy
+  
+  # フォロー機能
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # ① フォローしている人取得(Userのfollowerから見た関係)
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # ② フォローされている人取得(Userのfolowedから見た関係)
+  
+  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人(自分がフォローされている人)
+  
+# model/user.rb
+# ユーザーをフォローする
+def follow(user_id)
+  follower.create(followed_id: user_id)
+end
 
-  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
-  validates :introduction, length: { maximum: 50 }
+# ユーザーのフォローを外す
+def unfollow(user_id)
+  follower.find_by(followed_id: user_id).destroy
+end
+
+# フォロー確認をおこなう
+def following?(user)
+  following_user.include?(user)
+end
 end
