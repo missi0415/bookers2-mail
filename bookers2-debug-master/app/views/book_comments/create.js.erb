@@ -1,0 +1,7 @@
+$("#comments-<%= @book.id %>").html("<%= j(render partial: 'books/comment', locals: {book.book_comments: @book} )%>")
+
+<%# ここにフォームリセットを書く？ %>
+
+$("textarea").val('')
+<%= f.text_area :content, class: "input-mysize" %>;
+<%# 値を取ることはできる　なぜなら、スクリプトをhtmlの下に付け加えるようなものだから %>
