@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'search/search'
   devise_for :users
+  # , :controllers => {
+  #   :registrations => 'users/registrations'
+  # }
+  
   root 'homes#top'
   get 'home/about' => 'homes#about'
   resources :users,only: [:show,:index,:edit,:update]

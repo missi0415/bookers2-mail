@@ -63,5 +63,11 @@ include JpPrefecture
   # 例) @user.prefecture_nameで該当ユーザーの住所(都道府県)を表示出来る。
 
 #-------------------
+  after_create :send_welcome_mail
+
+  def send_welcome_mail
+    ThanksMailer.send_signup_email(self).deliver
+  end
+
 
 end
