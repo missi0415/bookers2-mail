@@ -17,3 +17,20 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+$(function () {
+  $(document).on('turbolinks:load', () => {
+    $('#user_postcode').jpostal({
+      postcode: [
+        '#user_postcode'
+      ],
+      address: {
+        "#user_prefecture_code": "%3",
+        "#user_city": "%4%5",
+        "#user_street": "%6%7"
+      }
+    });
+  });
+});
+

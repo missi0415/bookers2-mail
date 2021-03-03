@@ -1,3 +1,4 @@
+
 $(".comments-count").html("コメント数: <%= @book.book_comments.count %>");
 $("#comments").html("<%= j(render 'books/comment', locals: {book: @book} )%>")
 <!--commentsというidを取得してbooks/commentに置き換える-->
